@@ -1,0 +1,45 @@
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
+  //   padding: {
+  //     inline: 10%;
+  //     block: 2rem;
+  //   }
+  background-color: grey;
+  height: auto;
+  gap: 2rem;
+
+  header {
+    display: flex;
+    height: 3rem;
+    h3 {
+      margin: 0;
+    }
+
+    div {
+      display: flex;
+    }
+  }
+
+  form {
+    height: auto;
+    display: grid;
+    grid-template-columns: 80% 20%;
+    justify-items: flex-start;
+    align-content: center;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  footer {
+    display: flex;
+    justify-content: flex-end;
+    height: auto;
+
+    button {
+      width: 5rem;
+    }
+  }
+}

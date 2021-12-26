@@ -1,0 +1,35 @@
+.container {
+  height: 100%;
+  width: 100%;
+}
+.main {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  padding: {
+    block: 3rem;
+    inline: 20%;
+  }
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.formNav {
+  display: flex;
+  justify-content: space-around;
+  height: 5rem;
+  width: 100%;
+}
+
+.cardGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+
+.card {
+  width: 100%;
+  height: 100%;
+  background-color: grey;
+}

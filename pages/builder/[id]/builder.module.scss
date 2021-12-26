@@ -1,0 +1,18 @@
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  height: 2.5rem;
+}
+
+.actions {
+  display: flex;
+  height: 2.5rem;
+}
