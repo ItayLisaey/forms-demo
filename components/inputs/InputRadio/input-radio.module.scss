@@ -1,0 +1,12 @@
+@use '../../../styles/mixins' as m;
+
+.container {
+  @include m.input-container;
+}
+.options {
+  @include m.input-options;
+}
+
+.option {
+  @include m.input-option;
+}

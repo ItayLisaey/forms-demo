@@ -1,21 +1,23 @@
+import { Field } from 'formik';
 import React from 'react';
 import { FormFieldTemplate } from '../../../types/builder.types';
+import { InputProps } from '../../../types/viewer.types';
 import classes from './input-dropdown.module.scss';
 
-export interface InputDropdownProps {
-  field: FormFieldTemplate;
-}
-
-export const InputDropdown: React.VFC<InputDropdownProps> = ({ field }) => {
+export const InputDropdown: React.VFC<InputProps> = ({ field }) => {
   if (field.options) {
     return (
-      <div>
-        <label htmlFor=''>{field.title}</label>
-        <select name={field.title} id={field.id}>
+      <div className={classes.container}>
+        <label className={classes.title}>{field.title}</label>
+        <Field component={'select'} name={field.title}>
           {field.options.map((option, key) => {
-            return <option key={key}>{option}</option>;
+            return (
+              <option key={key} value={option}>
+                {option}
+              </option>
+            );
           })}
-        </select>
+        </Field>
       </div>
     );
   } else {

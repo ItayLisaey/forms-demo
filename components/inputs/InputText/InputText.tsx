@@ -1,16 +1,15 @@
+import { Field, FormikProps } from 'formik';
 import React from 'react';
-import { FormFieldTemplate } from '../../../types/builder.types';
+import { InputProps } from '../../../types/viewer.types';
 import classes from './input-text.module.scss';
 
-interface InputTextProps {
-  field: FormFieldTemplate;
-}
-
-export const InputText: React.VFC<InputTextProps> = ({ field }) => {
+export const InputText: React.VFC<InputProps> = ({ field, ...props }) => {
   return (
-    <div>
-      <label htmlFor={field.title}>{field.title}</label>
-      <input type='text' name={field.title} id={field.id} />
+    <div className={classes.container}>
+      <label htmlFor={field.title} className={classes.title}>
+        {field.title}
+      </label>
+      <Field type='text' name={field.title} id={field.id} />
     </div>
   );
 };

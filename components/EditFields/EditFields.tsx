@@ -7,8 +7,7 @@ import classes from './edit-fields.module.scss';
 export interface EditFieldsProps {}
 
 export const EditFields: React.VFC<EditFieldsProps> = () => {
-  const { form, editField, addField, focus, setFocus } =
-    useContext(BuilderContext);
+  const { form, focus } = useContext(BuilderContext);
   if (form.fields.length > 0) {
     return (
       <section className={classes.container}>
