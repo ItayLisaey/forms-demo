@@ -1,5 +1,9 @@
 import React from 'react';
 import { FormFieldTemplate } from '../../types/builder.types';
+import { InputCheckbox } from '../inputs/InputCheckbox';
+import { InputDropdown } from '../inputs/InputDropdown';
+import { InputRadio } from '../inputs/InputRadio';
+import { InputText } from '../inputs/InputText';
 import classes from './form-field.module.scss';
 
 export interface FormFieldProps {
@@ -9,14 +13,16 @@ export interface FormFieldProps {
 export const FormField: React.VFC<FormFieldProps> = ({ field }) => {
   switch (field.type) {
     case 'checkbox':
-      return <FormInput field={field} />;
+      return <InputCheckbox field={field} />;
     case 'text':
-      return <FormInput field={field} />;
+      return <InputText field={field} />;
     case 'radio':
-      return <FormInput field={field} />;
+      return <InputRadio field={field} />;
+    case 'dropdown':
+      return <InputDropdown field={field} />;
 
     default:
-      return <FormInput field={field} />;
+      return <InputText field={field} />;
   }
 };
 

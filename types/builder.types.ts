@@ -12,6 +12,6 @@ export interface FormFieldTemplate {
   options?: string[];
 }
 
-export type FormTypes = 'text' | 'checkbox' | 'radio';
+export type FormTypes = 'text' | 'checkbox' | 'radio' | 'dropdown';
 
 export interface ShortTextField extends FormFieldTemplate {}
