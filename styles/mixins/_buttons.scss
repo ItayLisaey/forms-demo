@@ -1,13 +1,13 @@
 @use '../colors' as c;
 
-@mixin button {
+@mixin button($color: c.$dark) {
   border: none;
   height: 100%;
   padding: {
     inline: 1rem;
     block: 0.5rem;
   }
-  background-color: c.$dark;
+  background-color: $color;
   cursor: pointer;
   border-radius: 0.3rem;
   transition: all 0.2s ease;
@@ -15,11 +15,32 @@
   font-weight: 600;
 
   &:hover {
-    background-color: rgba($color: c.$dark, $alpha: 0.8);
+    background-color: rgba($color: $color, $alpha: 0.8);
   }
 
   &:active {
     background-color: rgba($color: c.$darker, $alpha: 1);
+    transform: scale(0.97);
+  }
+}
+
+@mixin button-base($colorOne: c.$dark, $colorTwo: c.$darker) {
+  background-color: $colorOne;
+  border: none;
+  height: 100%;
+  padding: {
+    inline: 1rem;
+    block: 0.5rem;
+  }
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-weight: 600;
+
+  &:hover {
+    background-color: $colorTwo;
+  }
+
+  &:active {
     transform: scale(0.97);
   }
 }

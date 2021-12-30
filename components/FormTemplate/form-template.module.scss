@@ -1,3 +1,6 @@
+@use '../../styles/colors' as c;
+@use '../../styles/mixins' as m;
+
 .container {
   display: flex;
   flex-direction: column;
@@ -7,13 +10,58 @@
 .main {
   display: flex;
   flex-direction: column;
+  overflow-y: auto;
 }
 
 .header {
-  height: 2.5rem;
+  padding: {
+    block: 1rem;
+    inline: 20%;
+  }
+  input {
+    border: none;
+    background-color: transparent;
+    font-size: 1.7rem;
+    color: c.$darker;
+    font-weight: 600;
+    padding: {
+      block: 0.3rem;
+    }
+
+    &:focus-visible {
+      outline: none;
+      border-bottom: 0.15rem solid c.$darker;
+    }
+  }
 }
 
-.actions {
+.footer {
+  padding: {
+    inline: 20%;
+  }
   display: flex;
-  height: 2.5rem;
+  justify-content: space-between;
+  min-height: 3rem;
+  background-color: c.$dark;
+
+  .more {
+    width: 100%;
+    justify-content: flex-end;
+    align-items: center;
+    display: flex;
+    gap: 1rem;
+  }
+
+  button {
+    @include m.button-base(c.$darker, rgba(c.$darker, $alpha: 0.5));
+    color: c.$light;
+    min-width: 10rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.8rem;
+    svg {
+      height: 1.3rem;
+    }
+  }
 }

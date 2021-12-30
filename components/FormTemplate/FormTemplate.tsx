@@ -1,8 +1,14 @@
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Head from 'next/head';
 import React, { useContext, useEffect } from 'react';
 import { BuilderContext } from '../../context/builder.context';
 import { EditFields } from '../EditFields';
 import classes from './form-template.module.scss';
+import {
+  faFloppyDisk,
+  faRotate,
+  faSquarePlus,
+} from '@fortawesome/free-solid-svg-icons';
 
 export interface FormTemplateProps {
   id: string | undefined;
@@ -49,14 +55,23 @@ export const FormTemplate: React.VFC<FormTemplateProps> = ({ id }) => {
         />
       </header>
       <main className={classes.main}>
-        <section>
-          <EditFields />
-        </section>
+        <EditFields />
       </main>
-      <footer className={classes.actions}>
-        <button onClick={addField}>Add Field</button>
-        <button>Reset Form</button>
-        <button onClick={handleSave}>Save Form</button>
+      <footer className={classes.footer}>
+        <button onClick={addField}>
+          <FontAwesomeIcon icon={faSquarePlus} />
+          <span>Add Field</span>
+        </button>
+        <div className={classes.more}>
+          <button>
+            <FontAwesomeIcon icon={faRotate} />
+            <span>Reset</span>
+          </button>
+          <button onClick={handleSave}>
+            <FontAwesomeIcon icon={faFloppyDisk} />
+            <span>Save</span>
+          </button>
+        </div>
       </footer>
     </div>
   );
