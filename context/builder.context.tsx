@@ -5,6 +5,7 @@ import { moveItem } from '../utils/builder/general.utils';
 
 interface BuilderContextProps {
   form: FormTemplate;
+  setForm: (template: FormTemplate) => void;
   editTitle: (title: string) => void;
   editId: (id: string) => void;
   addField: () => void;
@@ -25,6 +26,7 @@ export const BuilderContext = createContext<BuilderContextProps>({
     id: '',
     fields: [],
   },
+  setForm: () => {},
   editTitle: () => {},
   editId: () => {},
   addField: () => {},
@@ -139,6 +141,7 @@ export const BuilderContextProvider: React.FC = (props) => {
     <BuilderContext.Provider
       value={{
         form: currentForm,
+        setForm: setCurrentForm,
         editTitle: editTitle,
         editId: editId,
         addField: addField,
