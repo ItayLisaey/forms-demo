@@ -8,6 +8,11 @@
 }
 
 .main {
+  height: 100%;
+  padding: {
+    block: 1rem;
+  }
+
   display: flex;
   flex-direction: column;
   overflow-y: auto;

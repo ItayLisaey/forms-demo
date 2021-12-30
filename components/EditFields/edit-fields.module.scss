@@ -1,21 +1,82 @@
+@use '../../styles/mixins' as m;
+@use '../../styles/colors' as c;
+
 .container {
   display: flex;
-  height: 100%;
   flex-direction: column;
+  justify-content: flex-start;
+  gap: 1rem;
   padding: {
     inline: 20%;
   }
 }
 
+.info {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.move {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0;
+  button {
+    @include m.button;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    width: auto;
+    svg {
+      height: 1.1rem;
+    }
+
+    &:nth-child(1) {
+      border-radius: 0.2rem 0 0 0.2rem;
+    }
+    &:nth-child(2) {
+      border-radius: 0 0.2rem 0.2rem 0;
+    }
+  }
+}
+
 .field {
   display: flex;
-  height: 3rem;
   align-items: center;
+  justify-content: space-between;
+}
+
+.title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: c.$darker;
+  gap: 0.5rem;
+
+  svg {
+    width: 1rem;
+  }
+
   h4 {
     margin: 0;
+    font-size: 1.3rem;
   }
-  div {
-    height: 2rem;
+}
+
+.actions {
+  height: 2rem;
+  display: flex;
+  gap: 0.5rem;
+
+  button {
+    @include m.button;
     display: flex;
+    gap: 0.5rem;
+    width: auto;
+    svg {
+      width: 1rem;
+    }
   }
 }

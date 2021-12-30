@@ -1,6 +1,7 @@
 import { ObjectID } from 'bson';
 import { createContext, useCallback, useState } from 'react';
 import { FormTemplate, FormFieldTemplate } from '../types/builder.types';
+import { moveItem } from '../utils/builder/general.utils';
 
 interface BuilderContextProps {
   form: FormTemplate;
@@ -9,6 +10,11 @@ interface BuilderContextProps {
   addField: () => void;
   editField: (field: FormFieldTemplate) => void;
   deleteField: (id: FormFieldTemplate['id']) => void;
+  moveField: (
+    field: FormFieldTemplate,
+    oldIndex: number,
+    force: number
+  ) => void;
   focus: FormFieldTemplate | undefined;
   setFocus: (id: any) => void;
 }
@@ -24,6 +30,7 @@ export const BuilderContext = createContext<BuilderContextProps>({
   addField: () => {},
   editField: () => {},
   deleteField: () => {},
+  moveField: () => {},
   focus: undefined,
   setFocus: () => {},
 });
@@ -106,6 +113,28 @@ export const BuilderContextProvider: React.FC = (props) => {
     });
   }, []);
 
+  const setFields = useCallback((fields: FormFieldTemplate[]) => {
+    setCurrentForm((c) => {
+      return {
+        ...c,
+        fields: fields,
+      };
+    });
+  }, []);
+
+  const moveField = useCallback(
+    (field: FormFieldTemplate, oldIndex: number, force: number) => {
+      console.log('before', currentForm.fields);
+
+      const arr = moveItem(oldIndex, currentForm.fields, field, force);
+
+      if (arr) {
+        setFields(arr);
+      }
+    },
+    [currentForm.fields, setFields]
+  );
+
   return (
     <BuilderContext.Provider
       value={{
@@ -115,6 +144,7 @@ export const BuilderContextProvider: React.FC = (props) => {
         addField: addField,
         editField: editField,
         deleteField: deleteField,
+        moveField: moveField,
         focus: focusedField,
         setFocus: setFocus,
       }}
