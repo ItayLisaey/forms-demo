@@ -6,18 +6,14 @@ import classes from './form-fields.module.scss';
 
 export interface FormFieldsProps {
   fields: FormFieldTemplate[];
-  formikProps: FormikProps<any>;
 }
 
-export const FormFields: React.VFC<FormFieldsProps> = ({
-  fields,
-  formikProps,
-}) => {
+export const FormFields: React.VFC<FormFieldsProps> = ({ fields }) => {
   if (fields && fields.length > 0) {
     return (
       <main className={classes.container}>
         {fields.map((field, key) => {
-          return <FormField field={field} key={key} {...formikProps} />;
+          return <FormField field={field} key={key} />;
         })}
       </main>
     );

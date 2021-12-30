@@ -17,8 +17,20 @@ export const FormTemplate: React.VFC<FormTemplateProps> = ({ id }) => {
     }
   }, [editId, id]);
 
-  const handleSave = () => {
-    alert(JSON.stringify(form, null, 2));
+  const handleSave = async () => {
+    const template = JSON.stringify(form, null, 2);
+    const res = await fetch('/api/templates/' + id, {
+      method: 'POST',
+      body: template,
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    if (res.ok) {
+      alert('form ok');
+    } else {
+      alert('form not ok :(');
+    }
   };
 
   return (

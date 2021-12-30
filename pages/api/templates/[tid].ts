@@ -45,6 +45,8 @@ export default async function handler(
       } else {
         res.status(200).json({ body: result });
       }
+    } else {
+      res.status(405);
     }
   } catch (err) {
     res.status(500).json({ error: 'server error' });

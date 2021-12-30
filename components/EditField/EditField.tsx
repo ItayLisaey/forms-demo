@@ -21,7 +21,6 @@ export const EditField: React.VFC<EditFieldProps> = ({ field }) => {
     editField({
       ...field,
       ...fieldValue,
-      options: optionsCheck(field.type) ? fieldValue.options : undefined,
     });
     setFocus(undefined);
     console.log(field);
