@@ -1,0 +1,14 @@
+@use '../colors' as c;
+
+@mixin input {
+  height: 100%;
+  border: none;
+  border-radius: 0.3rem;
+  padding: {
+    inline: 0.5rem;
+  }
+
+  &:focus-visible {
+    outline: 0.13rem solid c.$darker;
+  }
+}

@@ -2,11 +2,37 @@ import type { NextPage } from 'next';
 import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useEffect, useMemo, useState } from 'react';
+import { FormCard } from '../components/FormCard';
+import { HubNav } from '../components/HubNav';
 import classes from '../styles/Home.module.scss';
-
-const placeholderForms = [1, 2, 3, 4, 5, 6];
+import { FormTemplate } from '../types/builder.types';
 
 const Home: NextPage = () => {
+  const [forms, setForms] = useState<FormTemplate[]>();
+  const [query, setQuery] = useState('');
+
+  useEffect(() => {
+    const fetchForms = async () => {
+      const res = await fetch('/api/templates');
+      if (res.ok) {
+        const json = await res.json();
+        setForms(json.body);
+      } else {
+        setForms(undefined);
+      }
+    };
+    fetchForms();
+  }, []);
+
+  const filteredForms = useMemo(() => {
+    if (forms) {
+      return forms.filter(({ title }) => title.includes(query));
+    } else {
+      return undefined;
+    }
+  }, [forms, query]);
+
   return (
     <div className={classes.container}>
       <Head>
@@ -15,23 +41,19 @@ const Home: NextPage = () => {
         <link rel='icon' href='/favicon.ico' />
       </Head>
       <main className={classes.main}>
-        <nav className={classes.formNav}>
-          <h1>Your Forms</h1>
-          <input type='text' placeholder='Search...' />
-          <button>New</button>
-        </nav>
-        <div className={classes.cardGrid}>
-          {placeholderForms.map((form, idx) => (
-            <div key={idx} className={classes.card}>
-              <Link href={'/builder/' + form}>
-                <a>{'form num' + form}</a>
-              </Link>
-            </div>
-          ))}
-        </div>
+        <HubNav query={{ val: query, set: setQuery }} />
+        <div className={classes.cardGrid}>{CardGrid(filteredForms)}</div>
       </main>
     </div>
   );
 };
 
 export default Home;
+
+const CardGrid = (forms: FormTemplate[] | undefined) => {
+  if (forms) {
+    return forms.map((form, key) => <FormCard key={key} form={form} />);
+  } else {
+    return <span>loading...</span>;
+  }
+};

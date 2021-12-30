@@ -1,0 +1,25 @@
+@use '../colors' as c;
+
+@mixin button {
+  border: none;
+  height: 100%;
+  padding: {
+    inline: 1rem;
+    block: 0.5rem;
+  }
+  background-color: c.$dark;
+  cursor: pointer;
+  border-radius: 0.3rem;
+  transition: all 0.2s ease;
+  color: rgba($color: c.$light, $alpha: 1);
+  font-weight: 600;
+
+  &:hover {
+    background-color: rgba($color: c.$dark, $alpha: 0.8);
+  }
+
+  &:active {
+    background-color: rgba($color: c.$darker, $alpha: 1);
+    transform: scale(0.97);
+  }
+}

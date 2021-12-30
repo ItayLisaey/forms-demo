@@ -1,3 +1,6 @@
+@forward '../styles/mixins/inputs';
+@forward '../styles/mixins/buttons';
+
 @mixin input-container {
   display: flex;
   flex-direction: column;
