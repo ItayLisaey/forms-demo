@@ -138,3 +138,38 @@
     }
   }
 }
+
+@media (max-width: 800px) {
+  .container {
+    header {
+      input {
+        font-size: 1rem;
+        width: max(10rem, 100%);
+      }
+    }
+  }
+
+  .footer {
+    .add {
+    }
+  }
+
+  .actions {
+    button {
+      width: 1.2rem;
+    }
+
+    svg {
+      height: 1.2rem;
+    }
+  }
+
+  .option {
+    button {
+      width: 1rem;
+    }
+    svg {
+      height: 1rem;
+    }
+  }
+}
