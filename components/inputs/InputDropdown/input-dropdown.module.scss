@@ -1,5 +1,18 @@
 @use '../../../styles/mixins' as m;
+@use '../../../styles/colors' as c;
 
 .container {
   @include m.input-container;
+
+  select {
+    width: min-content;
+    padding: {
+      block: 0.5rem;
+      inline: 0.5rem;
+    }
+    border: none;
+    border-radius: 0.3rem;
+    background-color: c.$dark;
+    color: white;
+  }
 }

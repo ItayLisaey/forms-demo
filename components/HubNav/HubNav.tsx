@@ -21,7 +21,7 @@ export const HubNav: React.VFC<HubNavProps> = ({ query }) => {
 
   return (
     <nav className={classes.container}>
-      <h1>Your Forms</h1>
+      <h1>All Forms</h1>
       <div className={classes.actions}>
         <input
           type='text'

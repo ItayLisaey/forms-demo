@@ -19,8 +19,11 @@
 }
 
 .header {
+  display: flex;
+  justify-content: space-between;
   padding: {
-    block: 1rem;
+    top: 2rem;
+    bottom: 1rem;
     inline: 20%;
   }
   input {
@@ -36,6 +39,17 @@
     &:focus-visible {
       outline: none;
       border-bottom: 0.15rem solid c.$darker;
+    }
+  }
+
+  a {
+    @include m.button;
+    display: flex;
+    justify-content: space-between;
+    gap: 0.7rem;
+    align-items: center;
+    svg {
+      width: 1rem;
     }
   }
 }

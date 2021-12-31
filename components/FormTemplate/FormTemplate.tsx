@@ -7,8 +7,10 @@ import classes from './form-template.module.scss';
 import {
   faFloppyDisk,
   faRotate,
+  faSquareArrowUpRight,
   faSquarePlus,
 } from '@fortawesome/free-solid-svg-icons';
+import Link from 'next/link';
 
 export interface FormTemplateProps {
   id: string | undefined;
@@ -69,6 +71,10 @@ export const FormTemplate: React.VFC<FormTemplateProps> = ({ id }) => {
             value={form.title}
             onChange={(e) => editTitle(e.target.value)}
           />
+          <a href={'/form/' + form.id} target={'_blank'} rel='noreferrer'>
+            <FontAwesomeIcon icon={faSquareArrowUpRight} />
+            <span>View Form</span>
+          </a>
         </header>
         <main className={classes.main}>
           <EditFields />
