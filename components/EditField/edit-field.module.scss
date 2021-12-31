@@ -1,49 +1,140 @@
+@use '../../styles/colors' as c;
+@use '../../styles/mixins' as m;
+
 .container {
   display: flex;
   justify-content: space-between;
-  // align-items: flex-start;
+  border-radius: 0.3rem;
   flex-direction: column;
   width: 100%;
   padding: {
     inline: 5%;
     block: 2rem;
   }
-  background-color: grey;
+  background-color: c.$dark;
   height: auto;
   gap: 2rem;
 
   header {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     height: 3rem;
-    h3 {
-      margin: 0;
+
+    input {
+      border: none;
+      background-color: transparent;
+      font-size: 1.7rem;
+      color: white;
+      font-weight: 600;
+      padding: {
+        block: 0.3rem;
+      }
+
+      &:focus-visible {
+        outline: none;
+        border-bottom: 0.15rem solid c.$darker;
+      }
     }
 
-    div {
-      display: flex;
+    select {
+      margin-left: 1rem;
+      background-color: c.$light;
+      border: none;
+      border-radius: 0.3rem;
+      padding: {
+        block: 0.5rem;
+        inline: 0.5rem;
+      }
     }
   }
 
-  form {
-    height: auto;
+  main {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    input {
+      height: 100%;
+      background-color: transparent;
+      border: none;
+      font-size: 1rem;
+      color: white;
+      padding: {
+        block: 0.3rem;
+        inline: 0.3rem;
+      }
+
+      &:focus-visible {
+        outline: none;
+        border-bottom: 0.1rem solid c.$darker;
+      }
+    }
+  }
+
+  .footer {
     display: flex;
     justify-content: space-between;
+    align-items: center;
+    height: auto;
 
-    label {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
+    .add {
+      @include m.button(c.$light);
+      color: c.$darker;
+      // width: 6rem;
     }
   }
 
-  footer {
-    display: flex;
+  .footer.wOptions {
     justify-content: flex-end;
-    height: auto;
+  }
+}
 
-    button {
-      width: 5rem;
+.option {
+  display: flex;
+  gap: 1rem;
+  button {
+    @include m.button;
+  }
+  svg {
+    width: 0.6rem;
+  }
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+
+  button {
+    @include m.button-base;
+    border: none;
+    background-color: transparent;
+    color: c.$light;
+    cursor: pointer;
+
+    &:hover {
+      transform: scale(1.1);
+      background-color: transparent;
+    }
+
+    &:active {
+      color: c.$darker;
+
+      transform: scale(0.97);
+    }
+  }
+
+  svg {
+    height: 1.7rem;
+  }
+
+  select {
+    margin-left: 1rem;
+    background-color: c.$light;
+    border: none;
+    border-radius: 0.3rem;
+    padding: {
+      block: 0.5rem;
+      inline: 0.5rem;
     }
   }
 }

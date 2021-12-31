@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Head from 'next/head';
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useCallback, useContext, useEffect, useState } from 'react';
 import { BuilderContext } from '../../context/builder.context';
 import { EditFields } from '../EditFields';
 import classes from './form-template.module.scss';
@@ -25,17 +25,18 @@ export const FormTemplate: React.VFC<FormTemplateProps> = ({ id }) => {
     }
   }, [editId, id]);
 
-  useEffect(() => {
-    const fetchTemplate = async () => {
-      const res = await fetch('/api/templates/' + id);
-      if (res.ok) {
-        const { body } = await res.json();
-        setForm(body);
-      }
-      setLoading(false);
-    };
-    fetchTemplate();
+  const fetchTemplate = useCallback(async () => {
+    const res = await fetch('/api/templates/' + id);
+    if (res.ok) {
+      const { body } = await res.json();
+      setForm(body);
+    }
+    setLoading(false);
   }, [id, setForm]);
+
+  useEffect(() => {
+    fetchTemplate();
+  }, [fetchTemplate, id]);
 
   const handleSave = async () => {
     const template = JSON.stringify(form, null, 2);
@@ -78,7 +79,7 @@ export const FormTemplate: React.VFC<FormTemplateProps> = ({ id }) => {
             <span>Add Field</span>
           </button>
           <div className={classes.more}>
-            <button>
+            <button onClick={fetchTemplate}>
               <FontAwesomeIcon icon={faRotate} />
               <span>Reset</span>
             </button>

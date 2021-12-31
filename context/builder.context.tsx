@@ -9,6 +9,7 @@ interface BuilderContextProps {
   editTitle: (title: string) => void;
   editId: (id: string) => void;
   addField: () => void;
+  duplicateField: (field: FormFieldTemplate) => void;
   editField: (field: FormFieldTemplate) => void;
   deleteField: (id: FormFieldTemplate['id']) => void;
   moveField: (
@@ -30,6 +31,7 @@ export const BuilderContext = createContext<BuilderContextProps>({
   editTitle: () => {},
   editId: () => {},
   addField: () => {},
+  duplicateField: () => {},
   editField: () => {},
   deleteField: () => {},
   moveField: () => {},
@@ -52,6 +54,18 @@ export const BuilderContextProvider: React.FC = (props) => {
       title: 'Untitled Field',
       required: false,
       type: 'text',
+    };
+    setCurrentForm((c) => {
+      return { ...c, fields: [...c.fields, newField] };
+    });
+    setFocusedField(newField);
+  };
+
+  const duplicateField = (field: FormFieldTemplate) => {
+    const id = new ObjectID().toString();
+    const newField: FormFieldTemplate = {
+      ...field,
+      id: id,
     };
     setCurrentForm((c) => {
       return { ...c, fields: [...c.fields, newField] };
@@ -145,6 +159,7 @@ export const BuilderContextProvider: React.FC = (props) => {
         editTitle: editTitle,
         editId: editId,
         addField: addField,
+        duplicateField: duplicateField,
         editField: editField,
         deleteField: deleteField,
         moveField: moveField,

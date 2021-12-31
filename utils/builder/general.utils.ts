@@ -1,6 +1,6 @@
 import { FormFieldTemplate, FormTypes } from '../../types/builder.types';
 
-export const optionsCheck = (type: FormTypes | undefined) => {
+export const optionsCheck = (type: string | undefined) => {
   if (type) {
     if (type === 'radio' || type === 'checkbox' || type === 'dropdown') {
       return true;
@@ -26,4 +26,11 @@ export const moveItem = <T>(
     newArr.splice(index + force, 0, element);
     return newArr;
   }
+};
+
+export const editItem = <T>(item: T, arr: T[], newValue: T): T[] => {
+  const newArr = arr;
+  const index = newArr.findIndex((i) => i === item);
+  newArr.splice(index, 1, newValue);
+  return newArr;
 };
