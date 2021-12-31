@@ -19,17 +19,23 @@ export default async function handler(
     client = await getMongoClient(res);
     const collection = client.db('forms-demo').collection('templates');
     const { tid } = req.query;
+    console.log('hey');
 
     if (req.method === 'POST') {
+      console.log('hey2');
       const template = isTemplate(req.body) && (req.body as FormTemplate);
+      console.log('hey3');
+
       if (!template) {
         res.status(400).json({ error: 'validation error' });
       } else {
+        console.log('hey4');
         const result = await collection.updateOne(
           { id: tid },
           { $set: { ...template } },
           { upsert: true }
         );
+        console.log('hey5');
 
         if (!result.acknowledged) {
           throw Error('mongo error');
@@ -43,12 +49,15 @@ export default async function handler(
       if (!result) {
         res.status(404).json({ body: 'no template found' });
       } else {
-        res.status(200).json({ body: result });
+        const { _id, ...other } = result;
+        res.status(200).json({ body: other });
       }
     } else {
       res.status(405);
     }
   } catch (err) {
+    console.log(err);
+
     res.status(500).json({ error: 'server error' });
   } finally {
     await client?.close();
