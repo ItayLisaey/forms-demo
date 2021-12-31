@@ -22,11 +22,26 @@
   display: flex;
   gap: 0.5rem;
   align-items: center;
+  justify-content: flex-end;
 
   input {
     @include m.input;
   }
   a {
     @include m.button;
+  }
+}
+
+@media (max-width: 800px) {
+  .container {
+    h1 {
+      font-size: 1.3rem;
+    }
+  }
+
+  .actions {
+    input {
+      width: 50%;
+    }
   }
 }

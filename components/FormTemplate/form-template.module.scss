@@ -84,3 +84,51 @@
     }
   }
 }
+
+@media (max-width: 800px) {
+  .header {
+    width: 100%;
+    box-sizing: border-box;
+    padding: {
+      inline: 5%;
+    }
+
+    input {
+      width: min(15rem, 100%);
+    }
+    a {
+      display: flex;
+      span {
+        display: none;
+      }
+      // width: min(9rem, 100%);
+    }
+  }
+
+  .footer {
+    padding: {
+      inline: 0;
+    }
+
+    button {
+      @include m.button-base(c.$darker, rgba(c.$darker, $alpha: 0.5));
+      color: c.$light;
+      min-width: 5rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 0.8rem;
+      svg {
+        height: 1.3rem;
+      }
+    }
+  }
+
+  .more {
+    width: 100%;
+    justify-content: flex-end;
+    align-items: center;
+    display: flex;
+    gap: 1rem;
+  }
+}
