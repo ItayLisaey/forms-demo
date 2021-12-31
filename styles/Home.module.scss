@@ -31,3 +31,16 @@
   grid-template-columns: repeat(4, 1fr);
   gap: 1rem;
 }
+
+@media (max-width: 800px) {
+  .main {
+    padding: {
+      block: 1rem;
+      inline: 10%;
+    }
+  }
+  .cardGrid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+}
