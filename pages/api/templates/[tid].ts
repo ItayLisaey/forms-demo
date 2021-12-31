@@ -19,23 +19,18 @@ export default async function handler(
     client = await getMongoClient(res);
     const collection = client.db('forms-demo').collection('templates');
     const { tid } = req.query;
-    console.log('hey');
 
     if (req.method === 'POST') {
-      console.log('hey2');
       const template = isTemplate(req.body) && (req.body as FormTemplate);
-      console.log('hey3');
 
       if (!template) {
         res.status(400).json({ error: 'validation error' });
       } else {
-        console.log('hey4');
         const result = await collection.updateOne(
           { id: tid },
           { $set: { ...template } },
           { upsert: true }
         );
-        console.log('hey5');
 
         if (!result.acknowledged) {
           throw Error('mongo error');
