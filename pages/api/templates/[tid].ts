@@ -2,6 +2,7 @@
 import { ObjectId } from 'bson';
 import { MongoClient } from 'mongodb';
 import type { NextApiRequest, NextApiResponse } from 'next';
+import { getMongoClient } from '../../../services/mongo.service';
 import { FormFieldTemplate, FormTemplate } from '../../../types/builder.types';
 
 type Data = {
@@ -13,11 +14,12 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<Data>
 ) {
+  console.info('Got request for handling a specific template');
   let client: MongoClient | null = null;
 
   try {
-    client = await getMongoClient(res);
-    const collection = client.db('forms-demo').collection('templates');
+    client = await getMongoClient();
+    const collection = client.db('Forms').collection('templates');
     const { tid } = req.query;
 
     if (req.method === 'POST') {
@@ -93,30 +95,3 @@ const isFieldTemplate = (candidate: any): candidate is FormFieldTemplate => {
 
   return true;
 };
-
-export async function getMongoClient(
-  context: NextApiResponse<Data>
-): Promise<MongoClient> {
-  if (!process.env.MONGO) {
-    context.status(500).json({
-      body: 'missing connection string to database',
-    });
-    throw new Error('missing connection string to database');
-  }
-
-  const client = new MongoClient(process.env.MONGO);
-
-  client.on('serverClosed', () => console.log('live connection server closed'));
-
-  client.on('open', () =>
-    console.log('live connection to the database opened')
-  );
-  client.on('close', () =>
-    console.log('live connection to the database closed')
-  );
-  client.on('error', (err) =>
-    console.log('live connection to the database errored out', err)
-  );
-
-  return await client.connect();
-}
